@@ -16,6 +16,12 @@ namespace Mango.Services.OrderAPI.Repositories
         public async Task<bool> Store(OrderHeader orderHeader)
         {
             await using var _db = new ApplicationDbContext(_context);
+            
+            if (orderHeader.CouponCode == null)
+            {
+                orderHeader.CouponCode = string.Empty;
+            }
+
             _db.OrderHeaders.Add(orderHeader);
             await _db.SaveChangesAsync();
             return true;

@@ -83,6 +83,11 @@ namespace Mango.Web.Controllers
         {
             try
             {
+                if (cartDto.CartHeader.CouponCode == null)
+                {
+                    cartDto.CartHeader.CouponCode = string.Empty;
+                }
+
                 var accessToken = await HttpContext.GetTokenAsync("access_token");
                 var response = await _cartService.CheckoutAsync<ResponseDto>(cartDto.CartHeader, accessToken);
                 if (!response.IsSuccess)

@@ -13,6 +13,12 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
     };
 });
 
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+// Crear una instancia del ConfigurationBuilder para combinar las configuraciones
+var configuration = new ConfigurationBuilder().Build();
+
 builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
